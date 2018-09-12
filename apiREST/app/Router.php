@@ -13,6 +13,11 @@ class Router
         $this->pc_instance = new PostController();
     }
 
+    /**
+     * select the method
+     * @param  array $datas
+     * @return array
+     */
     public function method($datas = [])
     {
         if ($datas['method'] == 'show' && !array_key_exists('id', $datas)){
@@ -20,7 +25,7 @@ class Router
         } elseif ($datas['method'] == 'show') {
             return $this->pc_instance->show($datas);
         } else {
-            // exception
+            throw new \Exception("not found");
         }
     }
 }

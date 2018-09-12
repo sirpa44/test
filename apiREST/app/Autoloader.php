@@ -16,7 +16,8 @@ class Autoloader
         if(file_exists($fileName))
         {
             require $fileName;
-            // mettre condition
+        } else {
+            throw new \Exception("file not found");
         }
     }
 }

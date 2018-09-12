@@ -5,7 +5,7 @@ class App
 {
 
     /**
-     *
+     * autoloading 
      */
     public static function load()
     {
@@ -13,5 +13,5 @@ class App
         Autoloader::register();
     }
 
-    
+
 }

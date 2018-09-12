@@ -29,6 +29,8 @@ class Json
         $datas = $this->contentExtract();
         if (array_key_exists($setting['id'], $datas)) {
             return $datas[$setting['id']];
+        } else {
+            throw new \Exception("not found");
         }
     }
 

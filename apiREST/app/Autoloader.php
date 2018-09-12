@@ -1,20 +1,22 @@
 <?php
+namespace app;
 
 class Autoloader
 {
 
-    static function register()
+    static public function register()
     {
         spl_autoload_register(array(__CLASS__,'autoload'));
     }
 
-    static function autoload($class)
+    static public function autoload($class)
     {
-        if (strpos($class,__NAMESPACE__ . '\\') === 0) {
-            $class = str_replace(__NAMESPACE__ . '\\', '', $class);
-            $class = str_replace('\\', '/', $class);
-            var_dump(__DIR__ . '/' . $class . '.php');die();
-            require __DIR__ . '/' . $class . '.php';
+        $class = str_replace('\\', '/', $class);
+        $fileName = ROOT . '/' . $class . '.php';
+        if(file_exists($fileName))
+        {
+            require $fileName;
+            // mettre condition
         }
     }
 }

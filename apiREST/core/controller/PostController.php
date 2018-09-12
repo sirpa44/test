@@ -1,17 +1,33 @@
 <?php
-namespace Core\Controller;
+namespace core\controller;
+
+use model\Json;
+use model\Csv;
 
 class PostController
 {
+    private $json_instance;
+    private $csv_instance;
+
+    public function __construct()
+    {
+        $this->json_instance    = new Json();
+        $this->csv_instance     = new Csv();
+    }
     /**
      * Display a listing of the ressource
      * GET /posts
      *
+     * @param array $datas
      * @return Response
      */
-    public function index()
+    public function index($setting)
     {
-
+        if ($setting['format']=='json') {
+            return $this->json_instance->getAll();
+        } elseif ($setting['format']=='csv') {
+            return $this->csv_instance->getAll();
+        }
     }
 
     /**
@@ -25,16 +41,7 @@ class PostController
         //
     }
 
-    /**
-     * Store a newly created ressources in storage
-     * POST /posts
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        //
-    }
+
 
     /**
      * Display a specified ressource
@@ -43,9 +50,13 @@ class PostController
      * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show($setting)
     {
-        //
+        if ($setting['format']=='json') {
+            return $this->json_instance->getone($setting);
+        } elseif ($setting['format']=='csv') {
+            return $this->csv_instance->getone($setting);
+        }
     }
 
     /**
@@ -60,17 +71,7 @@ class PostController
         //
     }
 
-    /**
-     * Update the specified ressouce in storage
-     * PUT /posts/{id}
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        //
-    }
+
 
     /**
      * Remove the specified ressource from storage

@@ -1,0 +1,12 @@
+{
+    "name": "test/improvement",
+    "authors": [
+        {
+            "name": "sirpa44",
+            "email": "sirpa.antoine@gmail.com"
+        }
+    ],
+    "require": {
+        "psr/http-message": "^1.0"
+    }
+}

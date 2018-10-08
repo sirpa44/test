@@ -1,12 +1,9 @@
 <?php
 require "../vendor/autoload.php";
-define('ROOT', __DIR__);
 
-require ROOT . '/app/App.php';
+$app = App\App();
 
-app\App::load();
-
-$router = new app\Router();
+$router = new App\Router();
 
 try {
     $datas = $router->method($_GET);

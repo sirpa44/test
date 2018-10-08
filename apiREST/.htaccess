@@ -1,0 +1,4 @@
+AuthName "Protected"
+AuthType Basic
+AuthUserFile "/var/www/patpat.com/public_html/test/apiREST/.htpasswd"
+Require valid-user

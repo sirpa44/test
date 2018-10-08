@@ -1,1 +1,7 @@
 /vendor/
+.idea/
+.idea/misc.xml
+.idea/modules.xml
+.idea/test.iml
+.idea/vcs.xml
+.idea/workspace.xml

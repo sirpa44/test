@@ -1,5 +1,5 @@
 <?php
-namespace Api\model;
+namespace Aot\model;
 
 
 class Json

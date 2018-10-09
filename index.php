@@ -1,8 +1,8 @@
 <?php
-define('ROOT', __DIR__ . '/Api/');
+define('ROOT', __DIR__ . '/Src/');
 require "vendor/autoload.php";
 
-$router = new Api\App\Router();
+$router = new Aot\App\Router();
 
 try {
     $datas = $router->method($_GET);

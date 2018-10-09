@@ -1,8 +1,8 @@
 <?php
-namespace Api\core\controller;
+namespace Aot\core\controller;
 
-use Api\model\Json;
-use Api\model\Csv;
+use Aot\model\Json;
+use Aot\model\Csv;
 
 class PostController
 {

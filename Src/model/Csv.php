@@ -1,5 +1,5 @@
 <?php
-namespace Api\model;
+namespace Aot\model;
 
 
 class Csv
@@ -7,7 +7,7 @@ class Csv
     private $path;
 
     public function __construct(){
-        $this->path = ROOT . '/source/testtakers.csv';
+        $this->path = ROOT . 'source/testtakers.csv';
     }
 
     /**
@@ -40,7 +40,6 @@ class Csv
      */
     private function contentExtract()
     {
-//        var_dump($this->path);die();
         $ressource = fopen($this->path, 'r');
         $headers = fgetcsv($ressource);
         while (($line = fgetcsv($ressource)) !== false) {

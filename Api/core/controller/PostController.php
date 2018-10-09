@@ -1,8 +1,8 @@
 <?php
-namespace core\controller;
+namespace Api\core\controller;
 
-use model\Json;
-use model\Csv;
+use Api\model\Json;
+use Api\model\Csv;
 
 class PostController
 {

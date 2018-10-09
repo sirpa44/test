@@ -1,7 +1,7 @@
 <?php
-namespace App;
+namespace Api\App;
 
-use core\controller\PostController;
+use Api\core\controller\PostController;
 
 class Router
 {

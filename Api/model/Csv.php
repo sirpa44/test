@@ -1,10 +1,9 @@
 <?php
-namespace model;
+namespace Api\model;
 
 
 class Csv
 {
-    
     private $path;
 
     public function __construct(){
@@ -41,6 +40,7 @@ class Csv
      */
     private function contentExtract()
     {
+//        var_dump($this->path);die();
         $ressource = fopen($this->path, 'r');
         $headers = fgetcsv($ressource);
         while (($line = fgetcsv($ressource)) !== false) {

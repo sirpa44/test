@@ -1,5 +1,5 @@
 <?php
-namespace model;
+namespace Api\model;
 
 
 class Json

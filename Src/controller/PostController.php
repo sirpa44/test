@@ -1,5 +1,5 @@
 <?php
-namespace Aot\core\controller;
+namespace Aot\controller;
 
 use Aot\model\Json;
 use Aot\model\Csv;

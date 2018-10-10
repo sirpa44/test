@@ -1,7 +1,7 @@
 <?php
 namespace Aot\App;
 
-use Aot\core\controller\PostController;
+use Aot\controller\PostController;
 
 class Router
 {

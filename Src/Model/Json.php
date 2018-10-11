@@ -7,7 +7,7 @@ class Json
     private $path;
 
     public function __construct(){
-        $this->path = ROOT . '/source/testtakers.json';
+        $this->path = ROOT . '/Source/testtakers.json';
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
+var_dump(__DIR__);
 define('ROOT', __DIR__ . '/Src/');
-require "vendor/autoload.php";
+require __DIR__ . "/vendor/autoload.php";
 
 $router = new Aot\App\Router();
 

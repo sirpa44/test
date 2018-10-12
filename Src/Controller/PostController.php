@@ -1,50 +1,43 @@
 <?php
 namespace Aot\Controller;
 
-use Aot\Model\Json;
-use Aot\Model\Csv;
-
 class PostController
 {
-    private $json_instance;
-    private $csv_instance;
+    private $format;
+    private $method;
 
-    public function __construct()
+    public function __construct ()
     {
-        $this->json_instance    = new Json();
-        $this->csv_instance     = new Csv();
+        $this->format = ['csv','json'];
+        $this->method = ['show'];
     }
 
-    /**
-     * @param $setting
-     * @return array
-     * @throws \Exception
-     */
-    public function index($setting)
+    public function checkSettings ($settings)
     {
-        if ($setting['format']=='json') {
-            return $this->json_instance->getAll();
-        } elseif ($setting['format']=='csv') {
-            return $this->csv_instance->getAll();
+        if (array_key_exists('format', $settings) && array_key_exists('method', $settings)) {
+            $this->formatExist($settings['format']);
+            $this->methodExist($settings['method']);
+            die('coucou');
+            // incomplete !!
+
         } else {
-            throw new \Exception("not found");
+            throw new \Exception("settings invalid");
         }
     }
 
-    /**
-     * select the format
-     * @param array $setting
-     * @return array
-     */
-    public function show($setting)
+    private function formatExist ($format)
     {
-        if ($setting['format']=='json') {
-            return $this->json_instance->getone($setting);
-        } elseif ($setting['format']=='csv') {
-            return $this->csv_instance->getone($setting);
-        } else {
-            throw new \Exception("not found");
+        if (!in_array($format, $this->format))
+        {
+            throw new \Exception("format invalid");
         }
     }
 
+    private function methodExist ($method)
+    {
+        if (!in_array($method, $this->method))
+        {
+            throw new \Exception("method invalid");
+        }
+    }
 }

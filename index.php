@@ -5,7 +5,7 @@ require __DIR__ . "/vendor/autoload.php";
 $controller = new Aot\Controller\PostController();
 
 try {
-    $datas = $controller->isEmptySettings($_GET);
+    $datas = $controller->checkSettings($_GET);
     header('HTTP/1.1 200 OK');
     header('Content-Type: application/json');
     echo json_encode($datas);

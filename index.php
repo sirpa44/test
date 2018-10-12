@@ -1,5 +1,4 @@
 <?php
-var_dump(__DIR__);
 define('ROOT', __DIR__ . '/Src/');
 require __DIR__ . "/vendor/autoload.php";
 

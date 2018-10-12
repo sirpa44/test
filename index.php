@@ -2,10 +2,11 @@
 define('ROOT', __DIR__ . '/Src/');
 require __DIR__ . "/vendor/autoload.php";
 
-$controller = new Aot\Controller\PostController();
+$router = new \Aot\App\Router();
 
 try {
-    $datas = $controller->checkSettings($_GET);
+//    $datas = $controller->checkSettings($_GET);
+    $datas = $router->route($_GET);
     header('HTTP/1.1 200 OK');
     header('Content-Type: application/json');
     echo json_encode($datas);

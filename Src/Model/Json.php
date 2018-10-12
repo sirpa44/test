@@ -10,11 +10,20 @@ class Json
         $this->path = ROOT . 'Source/testtakers.json';
     }
 
+    public function jsonMethod($method, $id = null)
+    {
+        if ($method == 'show' && $id) {
+            return $this->getOne($id);
+        } elseif ($method == 'show' && $id == null) {
+            return $this->getAll();
+        }
+    }
+
     /**
      * get all users
      * @return array
      */
-    public function getAll()
+    private function getAll()
     {
         return $this->contentExtract();
     }
@@ -22,13 +31,13 @@ class Json
     /**
      * get one user
      * @param  array $setting
-     * @return array
+     * @return array $data
      */
-    public function getOne($setting)
+    private function getOne($id)
     {
-        $datas = $this->contentExtract();
-        if (array_key_exists($setting['id'], $datas)) {
-            return $datas[$setting['id']];
+        $data = $this->contentExtract();
+        if (array_key_exists($id, $data)) {
+            return $data[$id];
         } else {
             throw new \Exception("not found");
         }

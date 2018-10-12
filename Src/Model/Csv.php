@@ -10,27 +10,37 @@ class Csv
         $this->path = ROOT . 'Source/testtakers.csv';
     }
 
+    public function csvMethod($method, $id = null)
+    {
+        if ($method == 'show' && $id) {
+            return $this->getOne($id);
+        } elseif ($method == 'show' && $id == null) {
+            return $this->getAll();
+        }
+    }
+
     /**
      * get all users
      * @return array
      */
-    public function getAll()
+    private function getAll()
     {
         return $this->contentExtract();
     }
 
     /**
-     * get on user
+     * get one user
      * @param  array $setting
-     * @return array $datas
+     * @return array $content
      */
-    public function getOne($setting)
+    private function getOne($id)
     {
-        $datas = $this->contentExtract();
-        if (array_key_exists($setting['id'], $datas)) {
-            return $datas[$setting['id']];
+        $content = $this->contentExtract();
+        if (array_key_exists($id, $content)) {
+            return $content[$id];
+        } else {
+            throw new \Exception("not found");
         }
-        throw new \Exception("not found");
 
     }
 

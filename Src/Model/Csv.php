@@ -1,14 +1,15 @@
 <?php
-namespace model;
+
+namespace Aot\Model;
 
 
 class Csv
 {
-    
     private $path;
 
-    public function __construct(){
-        $this->path = ROOT . '/source/testtakers.csv';
+    public function __construct()
+    {
+        $this->path = ROOT . '/Source/testtakers.csv';
     }
 
     /**
@@ -44,7 +45,7 @@ class Csv
         $ressource = fopen($this->path, 'r');
         $headers = fgetcsv($ressource);
         while (($line = fgetcsv($ressource)) !== false) {
-            $datas[]  = array_combine($headers, $line);
+            $datas[] = array_combine($headers, $line);
         }
         fclose($ressource);
         return $datas;

@@ -1,8 +1,8 @@
 <?php
-namespace core\controller;
+namespace Aot\Controller;
 
-use model\Json;
-use model\Csv;
+use Aot\Model\Json;
+use Aot\Model\Csv;
 
 class PostController
 {
@@ -16,9 +16,9 @@ class PostController
     }
 
     /**
-     * select the format
-     * @param array $setting
+     * @param $setting
      * @return array
+     * @throws \Exception
      */
     public function index($setting)
     {

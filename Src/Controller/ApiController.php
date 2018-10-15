@@ -9,6 +9,7 @@ class ApiController
      * lead to the service
      * @param $parameters
      * @return array
+     * @throws \Exception
      */
     public function sendToService($parameters)
     {
@@ -19,8 +20,8 @@ class ApiController
         $model = new StrategyModel();
         if (array_key_exists('id', $parameters)) {
             $id = $parameters['id'];
-            return $model->octopus($format, $method, $id);
+            return $model->apiService($format, $method, $id);
         }
-        return $model->octopus($format, $method);
+        return $model->apiService($format, $method);
     }
 }

@@ -10,6 +10,13 @@ class Json
         $this->path = ROOT . 'Source/testtakers.json';
     }
 
+    /**
+     * define the method
+     * @param $method
+     * @param null $id
+     * @return array|mixed
+     * @throws \Exception
+     */
     public function jsonMethod($method, $id = null)
     {
         if ($method == 'show' && $id) {
@@ -29,9 +36,10 @@ class Json
     }
 
     /**
-     * get one user
-     * @param  array $setting
-     * @return array $data
+     * get one with the id
+     * @param $id
+     * @return mixed
+     * @throws \Exception
      */
     private function getOne($id)
     {

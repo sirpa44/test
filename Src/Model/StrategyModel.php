@@ -12,7 +12,15 @@ class StrategyModel
         $this->method = ['show'];
     }
 
-    public function octopus($format, $method, $id = null)
+    /**
+     * check $format and $method and lead to the function choseFormat
+     * @param $format
+     * @param $method
+     * @param null $id
+     * @return array
+     * @throws \Exception
+     */
+    public function apiService($format, $method, $id = null)
     {
         $this->checkFormat($format);
         $this->checkMethod($method);
@@ -22,6 +30,11 @@ class StrategyModel
         return $this->choseFormat($format, $method);
     }
 
+    /**
+     * check $format
+     * @param $format
+     * @throws \Exception
+     */
     private function checkFormat($format)
     {
         if (!in_array($format, $this->format))
@@ -30,6 +43,11 @@ class StrategyModel
         }
     }
 
+    /**
+     * check $method
+     * @param $method
+     * @throws \Exception
+     */
     private function checkMethod($method)
     {
         if (!in_array($method, $this->method))
@@ -38,6 +56,14 @@ class StrategyModel
         }
     }
 
+    /**
+     * define the method and lead to the good class
+     * @param $format
+     * @param $method
+     * @param null $id
+     * @return array
+     * @throws \Exception
+     */
     private function choseFormat($format, $method, $id = null)
     {
         if ($format == 'json') {

@@ -10,6 +10,13 @@ class Csv
         $this->path = ROOT . 'Source/testtakers.csv';
     }
 
+    /**
+     * define the method
+     * @param $method
+     * @param null $id
+     * @return array
+     * @throws \Exception
+     */
     public function csvMethod($method, $id = null)
     {
         if ($method == 'show' && $id) {
@@ -29,9 +36,10 @@ class Csv
     }
 
     /**
-     * get one user
-     * @param  array $setting
+     * get one user with the id
+     * @param  array $id
      * @return array $content
+     * @throws \Exception
      */
     private function getOne($id)
     {

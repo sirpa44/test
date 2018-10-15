@@ -20,6 +20,8 @@ class Router
      */
     public function method($datas = [])
     {
+        // If valid (controller & method)
+        // controller->method(params);
         if ($datas['method'] == 'show' && !array_key_exists('id', $datas)){
             return $this->pc_instance->index($datas);
         } elseif ($datas['method'] == 'show') {

@@ -16,17 +16,17 @@ class Router
             $controlerName  = '\Aot\Controller\\' . ucfirst($parameters['controller']) . 'Controller';
             $method         = $parameters['method'];
         } else {
-            die('controller or method invalid');
+            throw new \Exception("method or controller invalid");
         }
         if (class_exists($controlerName)) {
             $controller = new $controlerName();
         } else {
-            die('controller invalid');
+            throw new \Exception("controller invalid");
         }
         if (method_exists($controller, $method)) {
                 return $controller->$method($parameters);
             } else {
-            die('method invalid');
+            throw new \Exception("method invalid");
         }
     }
 

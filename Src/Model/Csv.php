@@ -12,16 +12,15 @@ class Csv
 
     /**
      * define the method
-     * @param $method
      * @param null $id
      * @return array
      * @throws \Exception
      */
-    public function csvMethod($method, $id = null)
+    public function csvMethod($id)
     {
-        if ($method == 'show' && $id) {
+        if ($id) {
             return $this->getOne($id);
-        } elseif ($method == 'show' && $id == null) {
+        } elseif ($id == null) {
             return $this->getAll();
         }
     }

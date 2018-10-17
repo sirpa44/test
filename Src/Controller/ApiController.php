@@ -1,7 +1,7 @@
 <?php
 namespace Aot\Controller;
 
-use Aot\Model\StrategyModel;
+use Aot\Model\ApiModel;
 
 class ApiController
 {
@@ -13,15 +13,15 @@ class ApiController
      */
     public function show($parameters)
     {
-        if (array_key_exists('format', $parameters) && array_key_exists('method', $parameters)) {
+        if (array_key_exists('format', $parameters)) {
             $format = $parameters['format'];
-            $method = $parameters['method'];
         }
-        $model = new StrategyModel();
+        $model = new ApiModel();
         if (array_key_exists('id', $parameters)) {
             $id = $parameters['id'];
-            return $model->apiService($format, $method, $id);
+        } else {
+            $id = null;
         }
-        return $model->apiService($format, $method);
+        return $model->apiService($format, $id);
     }
 }

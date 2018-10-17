@@ -12,16 +12,15 @@ class Json
 
     /**
      * define the method
-     * @param $method
      * @param null $id
      * @return array|mixed
      * @throws \Exception
      */
-    public function jsonMethod($method, $id = null)
+    public function jsonMethod($id)
     {
-        if ($method == 'show' && $id) {
+        if ($id) {
             return $this->getOne($id);
-        } elseif ($method == 'show' && $id == null) {
+        } elseif ($id == null) {
             return $this->getAll();
         }
     }
@@ -43,9 +42,9 @@ class Json
      */
     protected function getOne($id)
     {
-        $data = $this->contentExtract();
-        if (array_key_exists($id, $data)) {
-            return $data[$id];
+        $content = $this->contentExtract();
+        if (array_key_exists($id, $content)) {
+            return $content[$id];
         } else {
             throw new \Exception("not found");
         }

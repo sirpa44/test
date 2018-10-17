@@ -30,7 +30,7 @@ class Csv
      * get all users
      * @return array
      */
-    private function getAll()
+    protected function getAll()
     {
         return $this->contentExtract();
     }
@@ -41,7 +41,7 @@ class Csv
      * @return array $content
      * @throws \Exception
      */
-    private function getOne($id)
+    protected function getOne($id)
     {
         $content = $this->contentExtract();
         if (array_key_exists($id, $content)) {
@@ -56,7 +56,7 @@ class Csv
      * read, extract and convert a csv file content
      * @return array $datas
      */
-    private function contentExtract()
+    protected function contentExtract()
     {
         $ressource = fopen($this->path, 'r');
         $headers = fgetcsv($ressource);

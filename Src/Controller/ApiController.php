@@ -11,7 +11,7 @@ class ApiController
      * @return array
      * @throws \Exception
      */
-    public function sendToService($parameters)
+    public function show($parameters)
     {
         if (array_key_exists('format', $parameters) && array_key_exists('method', $parameters)) {
             $format = $parameters['format'];

@@ -6,7 +6,8 @@ class Csv
 {
     private $path;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->path = ROOT . 'Source/testtakers.csv';
     }
 
@@ -43,7 +44,7 @@ class Csv
     protected function getOne($id)
     {
         $content = $this->contentExtract();
-        if (array_key_exists($id, $content)) {
+        if (isset($id)) {
             return $content[$id];
         } else {
             throw new \Exception("not found");
@@ -60,7 +61,7 @@ class Csv
         $ressource = fopen($this->path, 'r');
         $headers = fgetcsv($ressource);
         while (($line = fgetcsv($ressource)) !== false) {
-            $datas[]  = array_combine($headers, $line);
+            $datas[] = array_combine($headers, $line);
         }
         fclose($ressource);
         return $datas;

@@ -6,7 +6,8 @@ class Json
 {
     private $path;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->path = ROOT . 'Source/testtakers.json';
     }
 
@@ -43,7 +44,7 @@ class Json
     protected function getOne($id)
     {
         $content = $this->contentExtract();
-        if (array_key_exists($id, $content)) {
+        if (isset($content[$id])) {
             return $content[$id];
         } else {
             throw new \Exception("not found");

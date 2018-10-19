@@ -13,11 +13,13 @@ class ApiController
      */
     public function show($parameters)
     {
-        if (array_key_exists('format', $parameters)) {
+        if (isset($parameters['format'])) {
             $format = $parameters['format'];
+        } else {
+            throw new \Exception("format invalid ");
         }
         $model = new ApiModel();
-        if (array_key_exists('id', $parameters)) {
+        if (isset($parameters['id'])) {
             $id = $parameters['id'];
         } else {
             $id = null;

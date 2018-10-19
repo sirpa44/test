@@ -14,7 +14,7 @@ class Router
     public function route($parameters)
     {
 
-        if ($parameters['controller'] && $parameters['method']) {
+        if (isset($parameters['controller']) && isset($parameters['method'])) {
             $controlerName = '\Aot\Controller\\' . ucfirst($parameters['controller']) . 'Controller';
             $method = $parameters['method'];
         } else {

@@ -1,14 +1,12 @@
 <?php
 namespace Aot\Model;
 
+use Aot\Model\Adapter\Csv;
+use Aot\Model\Adapter\Json;
+
 class ApiModel
 {
-    private $format = [];
-
-    public function __construct()
-    {
-        $this->format = ['csv','json'];
-    }
+    private $format = ['csv','json'];
 
     /**
      * check $format and $method and lead to the function choseFormat
@@ -20,7 +18,7 @@ class ApiModel
     public function apiService($format, $id)
     {
         $this->checkFormat($format);
-        return $this->choseFormat($format, $id);
+        return $this->chooseFormat($format, $id);
     }
 
     /**
@@ -42,7 +40,7 @@ class ApiModel
      * @return array|mixed
      * @throws \Exception
      */
-    private function choseFormat($format, $id)
+    private function chooseFormat($format, $id)
     {
         if ($format == 'json') {
             $formatInstance = new Json();;

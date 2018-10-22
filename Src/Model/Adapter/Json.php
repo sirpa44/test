@@ -1,25 +1,20 @@
 <?php
-namespace Aot\Model;
+namespace Aot\Model\Adapter;
 
 
-class Csv
+class Json
 {
-    private $path;
-
-    public function __construct()
-    {
-        $this->path = ROOT . 'Source/testtakers.csv';
-    }
+    private $path = ROOT . 'Source/testtakers.json';
 
     /**
      * define the method
      * @param null $id
-     * @return array
+     * @return array|mixed
      * @throws \Exception
      */
-    public function csvMethod($id)
+    public function jsonMethod($id)
     {
-        if ($id) {
+        if (isset($id)) {
             return $this->getOne($id);
         } elseif ($id == null) {
             return $this->getAll();
@@ -36,35 +31,28 @@ class Csv
     }
 
     /**
-     * get one user with the id
-     * @param  array $id
-     * @return array $content
+     * get one with the id
+     * @param $id
+     * @return mixed
      * @throws \Exception
      */
     protected function getOne($id)
     {
         $content = $this->contentExtract();
-        if (isset($id)) {
+        if (isset($content[$id])) {
             return $content[$id];
         } else {
             throw new \Exception("not found");
         }
-
     }
 
     /**
-     * read, extract and convert a csv file content
-     * @return array $datas
+     * extract and convert a csv file content
+     * @return array
      */
     protected function contentExtract()
     {
-        $ressource = fopen($this->path, 'r');
-        $headers = fgetcsv($ressource);
-        while (($line = fgetcsv($ressource)) !== false) {
-            $datas[] = array_combine($headers, $line);
-        }
-        fclose($ressource);
-        return $datas;
+        $content = file_get_contents($this->path);
+        return json_decode($content, true);
     }
-
 }

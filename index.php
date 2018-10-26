@@ -5,7 +5,6 @@ require __DIR__ . "/vendor/autoload.php";
 $router = new \Aot\App\Router();
 
 try {
-//    $datas = $controller->checkSettings($_GET);
     $datas = $router->route($_GET);
     header('HTTP/1.1 200 OK');
     header('Content-Type: application/json');

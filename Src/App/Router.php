@@ -15,19 +15,20 @@ class Router
     {
 
         if (isset($parameters['controller']) && isset($parameters['method'])) {
-            $controlerName = '\Aot\Controller\\' . ucfirst($parameters['controller']) . 'Controller';
+            $controllerClassName = ucfirst($parameters['controller']) . 'Controller';
+            $controllerName = '\Aot\Controller\\' . $controllerClassName;
             $method = $parameters['method'];
         } else {
             throw new \Exception("method or controller invalid");
         }
-        if (class_exists($controlerName)) {
-            $controller = new $controlerName();
+        if (class_exists($controllerName)) {
+            $controller = new $controllerName();
         } else {
             throw new \Exception("controller invalid");
         }
-        if (method_exists($controller, $method)) {
-                unset($parameters['method'], $parameters['controller']);
-                return $controller->$method($parameters);
+        if (is_callable($method, $controllerClassName)) {
+            unset($parameters['method'], $parameters['controller']);
+            return $controller->$method($parameters);
             } else {
             throw new \Exception("method invalid");
         }

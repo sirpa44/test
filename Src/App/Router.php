@@ -1,31 +1,38 @@
 <?php
 namespace Aot\App;
 
-use Aot\Controller\PostController;
 
 class Router
 {
-    private $pc_instance;
-
-
-    public function __construct()
-    {
-        $this->pc_instance = new PostController();
-    }
 
     /**
-     * select the method
-     * @param  array $datas
-     * @return array
+     * lead to the controller
+     * @param $parameters
+     * @return mixed
+     * @throws \Exception
      */
-    public function method($datas = [])
+    public function route($parameters)
     {
-        if ($datas['method'] == 'show' && !array_key_exists('id', $datas)){
-            return $this->pc_instance->index($datas);
-        } elseif ($datas['method'] == 'show') {
-            return $this->pc_instance->show($datas);
+
+        if (isset($parameters['controller']) && isset($parameters['method'])) {
+            $controllerClassName = ucfirst($parameters['controller']) . 'Controller';
+            $controllerName = '\Aot\Controller\\' . $controllerClassName;
+            $method = $parameters['method'];
         } else {
-            throw new \Exception("not found");
+            throw new \Exception("method or controller invalid");
+        }
+        if (class_exists($controllerName)) {
+            $controller = new $controllerName();
+        } else {
+            throw new \Exception("controller invalid");
+        }
+        if (is_callable($method, $controllerClassName)) {
+            unset($parameters['method'], $parameters['controller']);
+            return $controller->$method($parameters);
+            } else {
+            throw new \Exception("method invalid");
         }
     }
+
 }
+ 

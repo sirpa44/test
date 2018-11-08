@@ -11,7 +11,7 @@ class ApiController
      * @return array
      * @throws \Exception
      */
-    public function show($parameters)
+    public function action($parameters, $method)
     {
         if (isset($parameters['format'])) {
             $format = $parameters['format'];
@@ -24,6 +24,6 @@ class ApiController
         } else {
             $id = null;
         }
-        return $model->apiService($format, $id);
+        return $model->apiService($format, $id, $method);
     }
 }

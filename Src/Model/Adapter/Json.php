@@ -7,25 +7,10 @@ class Json
     private $path = ROOT . 'Source/testtakers.json';
 
     /**
-     * define the method
-     * @param null $id
-     * @return array|mixed
-     * @throws \Exception
-     */
-    public function jsonMethod($id)
-    {
-        if (isset($id)) {
-            return $this->getOne($id);
-        } elseif ($id == null) {
-            return $this->getAll();
-        }
-    }
-
-    /**
      * get all users
      * @return array
      */
-    protected function getAll()
+    public function showAll()
     {
         return $this->contentExtract();
     }
@@ -33,10 +18,10 @@ class Json
     /**
      * get one with the id
      * @param $id
-     * @return mixed
+     * @return array
      * @throws \Exception
      */
-    protected function getOne($id)
+    public function showOne($id)
     {
         $content = $this->contentExtract();
         if (isset($content[$id])) {

@@ -1,25 +1,28 @@
 <?php
 namespace Aot\Model;
 
-use Aot\Model\Adapter\Csv;
-use Aot\Model\Adapter\Json;
 use Aot\Model\Factory\FormatFactory;
 
 class ApiModel
 {
 
+
     /**
-     * check $format and $method and lead to the function choseFormat
+     * call the factory and call the adapter
      * @param $format
-     * @param null $id
+     * @param $id
      * @return array
      * @throws \Exception
      */
-    public function apiService($format, $id)
+    public function apiService($format, $id, $method)
     {
-        $factory = new FormatFactory();
-        $adapterInstance = $factory->getFormatInstance($format);
-        $method = $format . 'Method';
-        return $adapterInstance->$method($id);
+        if (is_callable($method, $format)) {
+            $factory = new FormatFactory();
+            $adapterInstance = $factory->getFormatInstance($format);
+            return $adapterInstance->$method($id);
+        } else {
+            throw new \Exception("method invalid");
+        }
     }
+
 }

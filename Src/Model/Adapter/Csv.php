@@ -7,25 +7,10 @@ class Csv
     private $path = ROOT . 'Source/testtakers.csv';
 
     /**
-     * define the method
-     * @param null $id
-     * @return array
-     * @throws \Exception
-     */
-    public function csvMethod($id)
-    {
-        if (isset($id)) {
-            return $this->getOne($id);
-        } elseif ($id == null) {
-            return $this->getAll();
-        }
-    }
-
-    /**
      * get all users
      * @return array
      */
-    protected function getAll()
+    public function showAll()
     {
         return $this->contentExtract();
     }
@@ -36,7 +21,7 @@ class Csv
      * @return array $content
      * @throws \Exception
      */
-    protected function getOne($id)
+    public function showOne($id)
     {
         $content = $this->contentExtract();
         if (isset($content[$id])) {

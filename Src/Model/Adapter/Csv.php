@@ -2,7 +2,7 @@
 namespace Aot\Model\Adapter;
 
 
-class Csv
+class Csv implements AdapterInterface
 {
     private $path = ROOT . 'Source/testtakers.csv';
 
@@ -34,9 +34,9 @@ class Csv
 
     /**
      * read, extract and convert a csv file content
-     * @return array $datas
+     * @return array
      */
-    protected function contentExtract()
+    public function contentExtract()
     {
         $ressource = fopen($this->path, 'r');
         $headers = fgetcsv($ressource);

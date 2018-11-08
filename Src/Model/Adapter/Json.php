@@ -2,7 +2,7 @@
 namespace Aot\Model\Adapter;
 
 
-class Json
+class Json implements AdapterInterface
 {
     private $path = ROOT . 'Source/testtakers.json';
 
@@ -35,7 +35,7 @@ class Json
      * extract and convert a csv file content
      * @return array
      */
-    protected function contentExtract()
+    public function contentExtract()
     {
         $content = file_get_contents($this->path);
         return json_decode($content, true);

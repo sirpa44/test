@@ -8,7 +8,7 @@ class Router
     /**
      * lead to the controller
      * @param $parameters
-     * @return mixed
+     * @return array
      * @throws \Exception
      */
     public function route($parameters)

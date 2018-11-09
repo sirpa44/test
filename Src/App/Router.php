@@ -13,8 +13,8 @@ class Router
      */
     public function route($parameters)
     {
-        $controllerClassName = ucfirst($parameters['controller']) . 'Controller';
         if (isset($parameters['controller']) && isset($parameters['method'])) {
+            $controllerClassName = ucfirst($parameters['controller']) . 'Controller';
             $controllerName = '\Aot\Controller\\' . $controllerClassName;
             $method = $parameters['method'];
         } else {
@@ -27,6 +27,7 @@ class Router
         } else {
             throw new \Exception("controller invalid");
         }
+
     }
 
 }

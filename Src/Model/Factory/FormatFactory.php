@@ -16,8 +16,16 @@ class FormatFactory
     {
         if (in_array($format, $this->format)) {
             $classPath = $this->path . ucfirst($format);
-            return new $classPath();
+            $instanceAdapter = new $classPath();
+            return $instanceAdapter;
+        } else {
+            throw new \Exception("format invalid");
         }
-        throw new \Exception("format invalid");
+//        if (is_a($instanceAdapter, 'Csv')) {
+//            return $instanceAdapter;
+//        } else {
+//            var_dump($instanceAdapter);
+//            throw new \Exception("instance invalid");
+//        }
     }
 }

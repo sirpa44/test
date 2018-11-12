@@ -7,7 +7,6 @@ interface ControllerInterface
 
     /**
      * lead to service
-     * @param array $parameters
      * @param string $method
      * @return array
      */

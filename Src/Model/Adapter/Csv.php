@@ -2,41 +2,15 @@
 namespace Aot\Model\Adapter;
 
 
-class Csv implements AdapterInterface
+class Csv extends Adapter
 {
-    private $path = ROOT . 'Source/testtakers.csv';
-
-    /**
-     * get all users
-     * @return array
-     */
-    public function showAll()
-    {
-        return $this->contentExtract();
-    }
-
-    /**
-     * get one user with the id
-     * @param  array $id
-     * @return array $content
-     * @throws \Exception
-     */
-    public function showOne($id)
-    {
-        $content = $this->contentExtract();
-        if (isset($content[$id])) {
-            return $content[$id];
-        } else {
-            throw new \Exception("not found");
-        }
-
-    }
+    protected $path = ROOT . 'Source/testtakers.csv';
 
     /**
      * read, extract and convert a csv file content
      * @return array
      */
-    public function contentExtract()
+    protected function contentExtract()
     {
         $ressource = fopen($this->path, 'r');
         $headers = fgetcsv($ressource);

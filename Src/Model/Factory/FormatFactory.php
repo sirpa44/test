@@ -5,12 +5,12 @@ class FormatFactory
 {
     private $format = ['Csv','Json'];
     private $path = 'Aot\Model\Adapter\\';
-    private $adapterInterfacePath = 'Aot\Model\Adapter\AdapterInterface';
+    private $adapterInterfacePath = 'Aot\Model\Adapter\Adapter';
 
     /**
      * create an instance of adapter
      * @param $format
-     * @return instance 
+     * @return instance
      * @throws \Exception
      */
     public function getFormatInstance($format)

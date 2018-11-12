@@ -3,7 +3,7 @@ namespace Aot\Model\Factory;
 
 class FormatFactory
 {
-    private $format = ['csv','json'];
+    private $format = ['Csv','Json'];
     private $path = 'Aot\Model\Adapter\\';
 
     /**
@@ -14,18 +14,15 @@ class FormatFactory
      */
     public function getFormatInstance($format)
     {
-        if (in_array($format, $this->format)) {
-            $classPath = $this->path . ucfirst($format);
-            $instanceAdapter = new $classPath();
-            return $instanceAdapter;
-        } else {
+        $className = ucfirst($format);
+        if (!in_array($className, $this->format)) {
             throw new \Exception("format invalid");
         }
-//        if (is_a($instanceAdapter, 'Csv')) {
-//            return $instanceAdapter;
-//        } else {
-//            var_dump($instanceAdapter);
-//            throw new \Exception("instance invalid");
-//        }
+        $classPath = $this->path . $className;
+        $instanceAdapter = new $classPath();
+        if (!is_a($instanceAdapter, $classPath)) {
+            throw new \Exception("instance invalid");
+        }
+        return $instanceAdapter;
     }
 }

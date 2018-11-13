@@ -19,15 +19,12 @@ class Router
         }
         $controllerClassName = ucfirst($parameters['controller']) . 'Controller';
         $controllerName = '\Aot\Controller\\' . $controllerClassName;
-        $method = $parameters['method'];
-        if (!class_exists($controllerName)) {
+        if (!is_a($controllerName, $this->interfaceControllerPath, true)) {
             throw new \Exception("controller invalid");
         }
+        $method = $parameters['method'];
         $controller = new $controllerName();
         unset($parameters['method'], $parameters['controller']);
-        if (!is_a($controller, $this->interfaceControllerPath)) {
-            throw new \Exception("controller invalid");
-        }
         return $controller->action($parameters, $method);
     }
 }

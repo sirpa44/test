@@ -5,7 +5,7 @@ class FormatFactory
 {
     private $format = ['Csv','Json'];
     private $path = 'Aot\Model\Adapter\\';
-    private $adapterInterfacePath = 'Aot\Model\Adapter\Adapter';
+    private $abstractClassPath = 'Aot\Model\Adapter\Adapter';
 
     /**
      * create an instance of adapter
@@ -20,10 +20,9 @@ class FormatFactory
             throw new \Exception("format invalid");
         }
         $classPath = $this->path . $className;
-        $instanceAdapter = new $classPath();
-        if (!is_a($instanceAdapter, $this->adapterInterfacePath)) {
+        if (!is_a($classPath, $this->abstractClassPath, true)) {
             throw new \Exception("instance invalid");
         }
-        return $instanceAdapter;
+        return new $classPath();
     }
 }

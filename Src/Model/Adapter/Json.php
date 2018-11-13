@@ -10,7 +10,7 @@ class Json extends Adapter
      * extract and convert a csv file content
      * @return array
      */
-    protected function contentExtract()
+    protected function dataManager()
     {
         $content = file_get_contents($this->path);
         return json_decode($content, true);

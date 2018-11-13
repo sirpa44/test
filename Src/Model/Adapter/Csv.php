@@ -10,7 +10,7 @@ class Csv extends Adapter
      * read, extract and convert a csv file content
      * @return array
      */
-    protected function contentExtract()
+    protected function dataManager()
     {
         $ressource = fopen($this->path, 'r');
         $headers = fgetcsv($ressource);

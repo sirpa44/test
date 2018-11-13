@@ -1,7 +1,7 @@
 <?php
 namespace Aot\Model\Adapter;
 
-abstract class Adapter
+abstract class Adapter implements AdapterInterface
 {
     /**
      * path to the ressources file
@@ -17,7 +17,7 @@ abstract class Adapter
      */
     public function showOne($id)
     {
-        $content = $this->contentExtract();
+        $content = $this->dataManager();
         if (!isset($content[$id])) {
             throw new \Exception("not found");
         }
@@ -30,12 +30,12 @@ abstract class Adapter
      */
     public function showAll()
     {
-        return $this->contentExtract();
+        return $this->dataManager();
     }
 
     /**
-     * read, extract and convert a csv file content in array
+     * read, extract and convert content in array
      * @return array
      */
-    abstract protected function contentExtract();
+    abstract protected function dataManager();
 }

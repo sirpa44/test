@@ -1,29 +1,31 @@
 <?php
-namespace Aot\Controller;
+namespace Oat\Controller;
 
-use Aot\Model\ApiModel;
+use Oat\Model\ApiModel;
 
-class ApiController
+class ApiController implements ControllerInterface
 {
+
     /**
-     * lead to the service
-     * @param $parameters
+     * lead to service
+     * @param array $parameters
+     * @param string $method
      * @return array
      * @throws \Exception
      */
-    public function show($parameters)
+    public function action($parameters, $method)
     {
-        if (isset($parameters['format'])) {
-            $format = $parameters['format'];
-        } else {
+        if (!isset($parameters['format'])) {
             throw new \Exception("format invalid ");
         }
+        $format = $parameters['format'];
         $model = new ApiModel();
         if (isset($parameters['id'])) {
             $id = $parameters['id'];
         } else {
             $id = null;
         }
-        return $model->apiService($format, $id);
+
+        return $model->apiService($format, $id, $method);
     }
 }

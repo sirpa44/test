@@ -1,38 +1,29 @@
 <?php
-namespace Aot\App;
-
+namespace Oat\App;
 
 class Router
 {
+    private $interfaceControllerPath = '\Oat\Controller\ControllerInterface';
 
     /**
      * lead to the controller
      * @param $parameters
-     * @return mixed
+     * @return array
      * @throws \Exception
      */
     public function route($parameters)
     {
-
-        if (isset($parameters['controller']) && isset($parameters['method'])) {
-            $controllerClassName = ucfirst($parameters['controller']) . 'Controller';
-            $controllerName = '\Aot\Controller\\' . $controllerClassName;
-            $method = $parameters['method'];
-        } else {
+        if (!isset($parameters['controller']) || !isset($parameters['method'])) {
             throw new \Exception("method or controller invalid");
         }
-        if (class_exists($controllerName)) {
-            $controller = new $controllerName();
-        } else {
+        $controllerClassName = ucfirst($parameters['controller']) . 'Controller';
+        $controllerName = '\Oat\Controller\\' . $controllerClassName;
+        if (!is_a($controllerName, $this->interfaceControllerPath, true)) {
             throw new \Exception("controller invalid");
         }
-        if (is_callable($method, $controllerClassName)) {
-            unset($parameters['method'], $parameters['controller']);
-            return $controller->$method($parameters);
-            } else {
-            throw new \Exception("method invalid");
-        }
+        $method = $parameters['method'];
+        $controller = new $controllerName();
+        unset($parameters['method'], $parameters['controller']);
+        return $controller->action($parameters, $method);
     }
-
 }
- 

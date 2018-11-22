@@ -1,53 +1,28 @@
 <?php
-namespace Aot\Model;
+namespace Oat\Model;
 
-use Aot\Model\Adapter\Csv;
-use Aot\Model\Adapter\Json;
+use Oat\Model\Factory\FormatFactory;
 
 class ApiModel
 {
-    private $format = ['csv','json'];
+
 
     /**
-     * check $format and $method and lead to the function choseFormat
-     * @param $format
-     * @param null $id
+     * call the factory and call the adapter
+     * @param string $format
+     * @param string $id
+     * @param string $method
      * @return array
      * @throws \Exception
      */
-    public function apiService($format, $id)
+    public function apiService($format, $id, $method)
     {
-        $this->checkFormat($format);
-        return $this->chooseFormat($format, $id);
+        if (!is_callable($method, $format)) {
+            throw new \Exception("method invalid");
+        }
+        $factory = new FormatFactory();
+        $adapterInstance = $factory->getFormatInstance($format);
+        return $adapterInstance->$method($id);
     }
 
-    /**
-     * check $format
-     * @param $format
-     * @throws \Exception
-     */
-    private function checkFormat($format)
-    {
-        if (!in_array($format, $this->format))
-        {
-            throw new \Exception("format invalid");
-        }
-    }
-
-    /**
-     * @param $format
-     * @param $id
-     * @return array|mixed
-     * @throws \Exception
-     */
-    private function chooseFormat($format, $id)
-    {
-        if ($format == 'json') {
-            $formatInstance = new Json();;
-        } elseif ($format == 'csv') {
-            $formatInstance = new Csv();
-        }
-        $method = $format . 'Method';
-        return $formatInstance->$method($id);
-    }
 }

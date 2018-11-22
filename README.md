@@ -2,10 +2,14 @@
 
 creation of an API REST 
 
+## instructions
+
+send a request by URL and display the data in Json format
+
 ## running the test
 
 send parameters by url:
-  - format (string, file data format, ex: format=json)
-  - method (string, method used, ex: method=show )
-  - id (integer, user id, ex: id= 54 ) (optional if you need only one user)
-
+  - controller=api
+  - format={json||csv}
+  - method={showOne||showAll}
+  - id=<integer> (optional, use it if you need only one user)

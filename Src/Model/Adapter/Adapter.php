@@ -1,5 +1,5 @@
 <?php
-namespace Aot\Model\Adapter;
+namespace Oat\Model\Adapter;
 
 abstract class Adapter implements AdapterInterface
 {

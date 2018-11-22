@@ -1,11 +1,11 @@
 <?php
-namespace Aot\Model\Factory;
+namespace Oat\Model\Factory;
 
 class FormatFactory
 {
     private $format = ['Csv','Json'];
-    private $path = 'Aot\Model\Adapter\\';
-    private $abstractClassPath = 'Aot\Model\Adapter\Adapter';
+    private $path = 'Oat\Model\Adapter\\';
+    private $abstractClassPath = 'Oat\Model\Adapter\Adapter';
 
     /**
      * create an instance of adapter

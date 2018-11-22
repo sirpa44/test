@@ -1,7 +1,7 @@
 <?php
-namespace Aot\Model;
+namespace Oat\Model;
 
-use Aot\Model\Factory\FormatFactory;
+use Oat\Model\Factory\FormatFactory;
 
 class ApiModel
 {

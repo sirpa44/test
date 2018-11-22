@@ -11,5 +11,5 @@ send a request by URL and display the data in Json format
 send parameters by url:
   - controller=api
   - format={json||csv}
-  - method={getOne||getAll}
+  - method={showOne||showAll}
   - id=<integer> (optional, use it if you need only one user)

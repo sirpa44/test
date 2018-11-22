@@ -1,5 +1,5 @@
 <?php
-namespace Aot\Controller;
+namespace Oat\Controller;
 
 
 interface ControllerInterface

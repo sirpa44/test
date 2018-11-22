@@ -1,7 +1,7 @@
 <?php
-namespace Aot\Controller;
+namespace Oat\Controller;
 
-use Aot\Model\ApiModel;
+use Oat\Model\ApiModel;
 
 class ApiController implements ControllerInterface
 {

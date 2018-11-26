@@ -1,5 +1,4 @@
 <?php
-
 namespace Oat\Model\Adapter;
 
 use PDO;
@@ -29,6 +28,7 @@ class Database implements AdapterInterface
      */
     public function showOne($id)
     {
+        $id = $id + 1;
         $request = $this->pdo->prepare('SELECT * FROM users WHERE id = ?');
         $request->execute(array($id));
         return $request->fetch(PDO::FETCH_ASSOC);

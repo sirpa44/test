@@ -28,20 +28,30 @@ class Database implements AdapterInterface
      */
     public function showOne($id)
     {
-        $id = $id + 1;
-        $request = $this->pdo->prepare('SELECT * FROM users WHERE id = ?');
-        $request->execute(array($id));
-        return $request->fetch(PDO::FETCH_ASSOC);
+        try {
+            $request = $this->pdo->prepare('SELECT * FROM users WHERE id = ?');
+            $request->execute(array($id));
+            $result = $request->fetch(PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            throw new \Exception($e);
+        }
+        return $result;
     }
 
     /**
      * get all the user
      * @return array
+     * @throws \Exception
      */
     public function showAll()
     {
-        $request = $this->pdo->prepare('SELECT * FROM users');
-        $request->execute();
-        return $request->fetchAll(PDO::FETCH_ASSOC);
+        try {
+            $request = $this->pdo->prepare('SELECT * FROM users');
+            $request->execute();
+            $result = $request->fetchAll(PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            throw new \Exception($e);
+        }
+        return $result;
     }
 }

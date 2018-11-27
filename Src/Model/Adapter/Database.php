@@ -29,7 +29,11 @@ class Database implements AdapterInterface
     public function showOne($id)
     {
         try {
-            $request = $this->pdo->prepare('SELECT * FROM users WHERE id = ?');
+            $request = $this->pdo->prepare('
+                SELECT id, login, password, title, lastname, firstname, gender, email, picture, address
+                FROM users
+                WHERE id = ?
+            ');
             $request->execute(array($id));
             $result = $request->fetch(PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
@@ -46,7 +50,10 @@ class Database implements AdapterInterface
     public function showAll()
     {
         try {
-            $request = $this->pdo->prepare('SELECT * FROM users');
+            $request = $this->pdo->prepare('
+                SELECT id, login, password, title, lastname, firstname, gender, email, picture, address
+                FROM users
+            ');
             $request->execute();
             $result = $request->fetchAll(PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {

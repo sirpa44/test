@@ -11,5 +11,19 @@ try {
     echo json_encode($datas);
 } catch (\Exception $e) {
     header("HTTP/1.0 500 Internal Server Error");
-    echo $e->getMessage();
+    if ($e instanceof PDOException) {
+        echo 'PBM de DB : ' . $e->getMessage();
+    } elseif ($e instanceof \Oat\App\Exception\DatabaseLogicException) {
+        echo 'PBM de Logic DB : ' . $e->getMessage();
+    } elseif ($e instanceof \Oat\App\Exception\ConfigException) {
+        echo 'PBM de configuration : ' . $e->getMessage();
+    } elseif ($e instanceof \Oat\App\Exception\AdapterException) {
+        echo 'PBM de l\'adapter : ' . $e->getMessage();
+    }
+    else {
+        echo $e->getMessage();
+    }
 }
+//catch () {
+//
+//}

@@ -1,6 +1,8 @@
 <?php
 namespace Oat\Model\Adapter;
 
+use Exception;
+
 abstract class Adapter implements AdapterInterface
 {
     /**
@@ -13,13 +15,13 @@ abstract class Adapter implements AdapterInterface
      * get one user with the ID
      * @param $id
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function showOne($id)
     {
         $content = $this->dataManager();
         if (!isset($content[$id])) {
-            throw new \Exception("not found");
+            throw new Exception("id unavailable");
         }
         return $content[$id];
     }

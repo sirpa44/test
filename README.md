@@ -6,17 +6,18 @@ creation of an API REST
 
 send a request by URL and display the data in Json format
 
-## database configuration
+## database mysql configuration
 
-  - create the database with the file /config/database.sql
-  - configure the database with the file /config/database.ini.dist
+  - create the database
+    * mysql -u <username> -p < config/mysql.sql
+  - configure the database with the file /config/mysql.ini.dist
     * fill the file with your settings
-    * rename the file as database.ini
+    * rename the file as mysql.ini
 
 ## running the test
 
 send parameters by url:
   - controller=api
-  - format={json||csv||database}
+  - format={json||csv||mysql}
   - method={showOne||showAll}
   - id=<integer> (optional, use it if you need only one user)

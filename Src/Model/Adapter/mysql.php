@@ -1,24 +1,16 @@
 <?php
 namespace Oat\Model\Adapter;
 
+use Oat\App\Exception\ConfigException;
 use PDO;
 
-class Database implements AdapterInterface
+class mysql implements AdapterInterface
 {
 
     private $pdo;
-    private $configPath = __DIR__ . '/../../../config/database.ini';
+    private $configPath = __DIR__ . '/../../../config/mysql.ini';
 
-    /**
-     * Database constructor.
-     */
-    public function __construct()
-    {
-        $config = parse_ini_file($this->configPath);
-        $this->pdo = new PDO('mysql:dbname=' . $config['dbname'] . ';host=' . $config['host'], $config['username'], $config['password']);
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    }
 
     /**
      * get one user with the ID
@@ -29,7 +21,8 @@ class Database implements AdapterInterface
     public function showOne($id)
     {
         try {
-            $request = $this->pdo->prepare('
+
+            $request = $this->getConnection()->prepare('
                 SELECT id, login, password, title, lastname, firstname, gender, email, picture, address
                 FROM users
                 WHERE id = ?
@@ -50,7 +43,7 @@ class Database implements AdapterInterface
     public function showAll()
     {
         try {
-            $request = $this->pdo->prepare('
+            $request = $this->getConnection()->prepare('
                 SELECT id, login, password, title, lastname, firstname, gender, email, picture, address
                 FROM users
             ');
@@ -60,5 +53,23 @@ class Database implements AdapterInterface
             throw new \Exception($e);
         }
         return $result;
+    }
+
+
+    /**
+     * @return PDO
+     * @throws ConfigException
+     */
+    protected function getConnection()
+    {
+        if (!$this->pdo) {
+            if (!file_exists($this->configPath)) {
+                throw new ConfigException('Config file missing');
+            }
+            $config = parse_ini_file($this->configPath);
+            $this->pdo = new PDO('mysql:dbname=' . $config['dbname'] . ';host=' . $config['host'], $config['username'], $config['password']);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        }
+        return $this->pdo;
     }
 }

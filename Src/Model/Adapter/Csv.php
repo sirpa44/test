@@ -2,6 +2,7 @@
 namespace Oat\Model\Adapter;
 
 
+use Oat\App\Exception\AdapterException;
 use Oat\App\Exception\ConfigException;
 
 class Csv extends Adapter
@@ -16,7 +17,7 @@ class Csv extends Adapter
     protected function dataManager()
     {
         if (!file_exists($this->path)) {
-            throw new ConfigException('csv file missing');
+            throw new AdapterException('csv file missing');
         }
         $ressource = fopen($this->path, 'r');
         $headers = fgetcsv($ressource);

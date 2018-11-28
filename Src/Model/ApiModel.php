@@ -1,6 +1,7 @@
 <?php
 namespace Oat\Model;
 
+use Oat\App\Exception\AdapterException;
 use Oat\Model\Factory\FormatFactory;
 
 class ApiModel
@@ -18,7 +19,7 @@ class ApiModel
     public function apiService($format, $id, $method)
     {
         if (!is_callable($method, $format)) {
-            throw new \Exception("method invalid");
+            throw new AdapterException("method invalid");
         }
         $factory = new FormatFactory();
         $adapterInstance = $factory->getFormatInstance($format);

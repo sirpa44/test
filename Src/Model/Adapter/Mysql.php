@@ -4,7 +4,7 @@ namespace Oat\Model\Adapter;
 use Oat\App\Exception\ConfigException;
 use PDO;
 
-class mysql implements AdapterInterface
+class Mysql implements AdapterInterface
 {
 
     private $pdo;
@@ -21,7 +21,6 @@ class mysql implements AdapterInterface
     public function showOne($id)
     {
         try {
-
             $request = $this->getConnection()->prepare('
                 SELECT id, login, password, title, lastname, firstname, gender, email, picture, address
                 FROM users

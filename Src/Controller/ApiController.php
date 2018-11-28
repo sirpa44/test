@@ -25,7 +25,6 @@ class ApiController implements ControllerInterface
         } else {
             $id = null;
         }
-
         return $model->apiService($format, $id, $method);
     }
 }

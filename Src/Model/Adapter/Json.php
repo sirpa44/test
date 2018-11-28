@@ -2,11 +2,12 @@
 namespace Oat\Model\Adapter;
 
 
+use Oat\App\Exception\AdapterException;
 use Oat\App\Exception\ConfigException;
 
 class Json extends Adapter
 {
-    protected $path = ROOT . 'Source/testtaers.json';
+    protected $path = ROOT . 'Source/testtakers.json';
 
     /**
      * extract and convert a csv file content
@@ -16,7 +17,7 @@ class Json extends Adapter
     protected function dataManager()
     {
         if (!file_exists($this->path)) {
-            throw new ConfigException('json file missing');
+            throw new AdapterException('json file missing');
         }
         $content = file_get_contents($this->path);
         return json_decode($content, true);

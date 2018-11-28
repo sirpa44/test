@@ -3,7 +3,7 @@ namespace Oat\Model\Factory;
 
 class FormatFactory
 {
-    private $format = ['Csv','Json', 'Database'];
+    private $format = ['Csv','Json', 'Mysql'];
     private $path = 'Oat\Model\Adapter\\';
     private $interfacePath = 'Oat\Model\Adapter\AdapterInterface';
 

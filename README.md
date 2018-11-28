@@ -9,7 +9,7 @@ send a request by URL and display the data in Json format
 ## database mysql configuration
 
   - create the database
-    * mysql -u <username> -p < config/mysql.sql
+    * mysql -u <username> -p < Src/Database/mysql.sql
   - configure the database with the file /config/mysql.ini.dist
     * fill the file with your settings
     * rename the file as mysql.ini

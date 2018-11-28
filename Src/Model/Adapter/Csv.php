@@ -9,7 +9,7 @@ class Csv extends Adapter
 
     /**
      * read, extract and convert a csv file content
-     * @return array
+     * @return array $data
      * @throws AdapterException
      */
     protected function dataManager()
@@ -17,13 +17,13 @@ class Csv extends Adapter
         if (!file_exists($this->path)) {
             throw new AdapterException('csv file missing');
         }
-        $ressource = fopen($this->path, 'r');
-        $headers = fgetcsv($ressource);
-        while (($line = fgetcsv($ressource)) !== false) {
-            $datas[] = array_combine($headers, $line);
+        $resource = fopen($this->path, 'r');
+        $headers = fgetcsv($resource);
+        while (($line = fgetcsv($resource)) !== false) {
+            $data[] = array_combine($headers, $line);
         }
-        fclose($ressource);
-        return $datas;
+        fclose($resource);
+        return $data;
     }
 
 }

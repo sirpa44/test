@@ -1,9 +1,7 @@
 <?php
 namespace Oat\Model\Adapter;
 
-
 use Oat\App\Exception\AdapterException;
-use Oat\App\Exception\ConfigException;
 
 class Csv extends Adapter
 {
@@ -12,7 +10,7 @@ class Csv extends Adapter
     /**
      * read, extract and convert a csv file content
      * @return array
-     * @throws ConfigException
+     * @throws AdapterException
      */
     protected function dataManager()
     {

@@ -1,9 +1,7 @@
 <?php
 namespace Oat\Model\Adapter;
 
-
 use Oat\App\Exception\AdapterException;
-use Oat\App\Exception\ConfigException;
 
 class Json extends Adapter
 {
@@ -12,7 +10,7 @@ class Json extends Adapter
     /**
      * extract and convert a csv file content
      * @return array
-     * @throws ConfigException
+     * @throws AdapterException
      */
     protected function dataManager()
     {

@@ -1,6 +1,7 @@
 <?php
 namespace Oat\Model\Adapter;
 
+use Oat\App\Exception\AdapterException;
 
 class Csv extends Adapter
 {
@@ -8,17 +9,21 @@ class Csv extends Adapter
 
     /**
      * read, extract and convert a csv file content
-     * @return array
+     * @return array $data
+     * @throws AdapterException
      */
     protected function dataManager()
     {
-        $ressource = fopen($this->path, 'r');
-        $headers = fgetcsv($ressource);
-        while (($line = fgetcsv($ressource)) !== false) {
-            $datas[] = array_combine($headers, $line);
+        if (!file_exists($this->path)) {
+            throw new AdapterException('csv file missing');
         }
-        fclose($ressource);
-        return $datas;
+        $resource = fopen($this->path, 'r');
+        $headers = fgetcsv($resource);
+        while (($line = fgetcsv($resource)) !== false) {
+            $data[] = array_combine($headers, $line);
+        }
+        fclose($resource);
+        return $data;
     }
 
 }

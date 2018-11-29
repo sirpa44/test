@@ -16,7 +16,7 @@ class ApiController implements ControllerInterface
     public function action($parameters, $method)
     {
         if (!isset($parameters['format'])) {
-            throw new \Exception("format invalid ");
+            throw new \Exception("format invalid");
         }
         $format = $parameters['format'];
         $model = new ApiModel();
@@ -25,7 +25,6 @@ class ApiController implements ControllerInterface
         } else {
             $id = null;
         }
-
         return $model->apiService($format, $id, $method);
     }
 }

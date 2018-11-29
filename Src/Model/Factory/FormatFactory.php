@@ -3,9 +3,9 @@ namespace Oat\Model\Factory;
 
 class FormatFactory
 {
-    private $format = ['Csv','Json'];
+    private $format = ['Csv','Json', 'Mysql'];
     private $path = 'Oat\Model\Adapter\\';
-    private $abstractClassPath = 'Oat\Model\Adapter\Adapter';
+    private $interfacePath = 'Oat\Model\Adapter\AdapterInterface';
 
     /**
      * create an instance of adapter
@@ -20,7 +20,7 @@ class FormatFactory
             throw new \Exception("format invalid");
         }
         $classPath = $this->path . $className;
-        if (!is_a($classPath, $this->abstractClassPath, true)) {
+        if (!is_a($classPath, $this->interfacePath, true)) {
             throw new \Exception("instance invalid");
         }
         return new $classPath();

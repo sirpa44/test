@@ -1,0 +1,9 @@
+parameters:
+    git_dir: .
+    bin_dir: vendor/bin
+    tasks:
+        phpmd:
+            whitelist_patterns: []
+            exclude: []
+            ruleset: ['cleancode', 'codesize', 'naming']
+            triggered_by: ['php']

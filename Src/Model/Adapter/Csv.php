@@ -5,7 +5,12 @@ use Oat\App\Exception\AdapterException;
 
 class Csv extends Adapter
 {
-    protected $path = ROOT . 'Source/testtakers.csv';
+    protected $path;
+
+    public function __construct($configurationManager)
+    {
+        $this->path = __DIR__ . $configurationManager->get('csvsourcepath');
+    }
 
     /**
      * read, extract and convert a csv file content

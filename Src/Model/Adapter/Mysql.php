@@ -10,6 +10,11 @@ class Mysql implements AdapterInterface
     private $pdo;
     private $configPath = __DIR__ . '/../../../config/mysql.ini';
 
+    public function __construct($configurationManager)
+    {
+        $this->configPath = __DIR__ . $configurationManager->get('mysqlsourcepath');
+    }
+
 
 
     /**
@@ -18,7 +23,7 @@ class Mysql implements AdapterInterface
      * @return array
      * @throws \Exception
      */
-    public function showOne($id)
+    public function showOne($userId)
     {
         try {
             $request = $this->getConnection()->prepare('
@@ -26,11 +31,12 @@ class Mysql implements AdapterInterface
                 FROM users
                 WHERE id = ?
             ');
-            $request->execute(array($id));
+            $request->execute(array($userId));
             $result = $request->fetch(PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
             throw new \Exception($e);
         }
+
         return $result;
     }
 

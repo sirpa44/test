@@ -8,23 +8,23 @@ class ApiController implements ControllerInterface
 
     /**
      * lead to service
+     * @param $dic DependencyInjectionContainer
      * @param array $parameters
      * @param string $method
      * @return array
      * @throws \Exception
      */
-    public function action($parameters, $method)
+    public function action($dic, $parameters, $method)
     {
         if (!isset($parameters['format'])) {
             throw new \Exception("format invalid");
         }
         $format = $parameters['format'];
-        $model = new ApiModel();
+        $userId = null;
         if (isset($parameters['id'])) {
-            $id = $parameters['id'];
-        } else {
-            $id = null;
+            $userId = $parameters['id'];
         }
-        return $model->apiService($format, $id, $method);
+        $dic->set(ApiModel::class);
+        return $dic->get('ApiModel')->apiService($dic, $format, $userId, $method);
     }
 }

@@ -7,9 +7,10 @@ interface ControllerInterface
 
     /**
      * lead to service
-     * @param $parameters
+     * @param $dic Dependency Injection Container
+     * @param array $parameters
      * @param string $method
      * @return array
      */
-    public function action($parameters, $method);
+    public function action($dic, $parameters, $method);
 }

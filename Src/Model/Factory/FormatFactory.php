@@ -1,11 +1,20 @@
 <?php
 namespace Oat\Model\Factory;
 
+use Oat\App\ConfigurationManager;
+
 class FormatFactory
 {
-    private $format = ['Csv','Json', 'Mysql'];
-    private $path = 'Oat\Model\Adapter\\';
-    private $interfacePath = 'Oat\Model\Adapter\AdapterInterface';
+    private $format;
+    private $adapterPath;
+    private $adapterInterfacePath;
+
+    public function __construct($configurationManager)
+    {
+        $this->format = $configurationManager->get('available', true);
+        $this->adapterPath = $configurationManager->get('adapterpath');
+        $this->adapterInterfacePath = $configurationManager->get('adapterinterfacepath');
+    }
 
     /**
      * create an instance of adapter
@@ -13,16 +22,21 @@ class FormatFactory
      * @return instance
      * @throws \Exception
      */
-    public function getFormatInstance($format)
+    public function getFormatInstance($dic, $format)
     {
-        $className = ucfirst($format);
-        if (!in_array($className, $this->format)) {
+        $format = strtolower($format);
+        if (!in_array($format, $this->format)) {
             throw new \Exception("format invalid");
         }
-        $classPath = $this->path . $className;
-        if (!is_a($classPath, $this->interfacePath, true)) {
+        $className = ucfirst($format);
+        $classPath = $this->adapterPath . $className;
+        if (!is_a($classPath, $this->adapterInterfacePath, true)) {
             throw new \Exception("instance invalid");
         }
-        return new $classPath();
+        $configurationManager = $dic->get('ConfigurationManager');
+        $dic->set($className, function () use ($classPath, $configurationManager) {
+            return new $classPath($configurationManager);
+        });
+        return $className;
     }
 }

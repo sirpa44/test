@@ -5,7 +5,12 @@ use Oat\App\Exception\AdapterException;
 
 class Json extends Adapter
 {
-    protected $path = ROOT . 'Source/testtakers.json';
+    protected $path;
+
+    public function __construct($configurationManager)
+    {
+        $this->path = __DIR__ . $configurationManager->get('jsonsourcepath');
+    }
 
     /**
      * extract and convert a csv file content

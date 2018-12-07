@@ -14,7 +14,7 @@ class ConfigurationManager implements ConfigurationInterface
      */
     public function __construct($configFilePath)
     {
-        if (!file_exists($configFilePath)) {
+        if (!is_readable($configFilePath)) {
             throw new ConfigException('configuration file missing');
         }
         $this->configData = parse_ini_file($configFilePath);

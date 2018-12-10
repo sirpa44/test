@@ -7,14 +7,12 @@ use Oat\App\ConfigurationManager;
 class FormatFactory
 {
     private $format;
-    private $adapterPath;
     private $adapterInterfacePath;
     private $dependencyContainer;
 
     public function __construct($dependencyContainer)
     {
         $this->format = $dependencyContainer->get(ConfigurationManager::class)->get('available', true);
-        $this->adapterPath = $dependencyContainer->get(ConfigurationManager::class)->get('adapterpath');
         $this->adapterInterfacePath = $dependencyContainer->get(ConfigurationManager::class)->get('adapterinterfacepath');
         $this->dependencyContainer = $dependencyContainer;
     }
@@ -31,8 +29,8 @@ class FormatFactory
         if (!in_array($format, $this->format)) {
             throw new \Exception("format invalid");
         }
-        $className = ucfirst($format);
-        $classPath = $this->adapterPath . $className;
+        $adapterConfig = $this->dependencyContainer->get(ConfigurationManager::class)->get($format);
+        $classPath = $adapterConfig['classpath'];
         if (!is_a($classPath, $this->adapterInterfacePath, true)) {
             throw new \Exception("instance invalid");
         }

@@ -29,8 +29,7 @@ class DependencyContainer implements DependencyContainerInterface
      */
     public function set($className, $closure = null)
     {
-        if (!is_callable($closure))
-        {
+        if (!is_callable($closure)) {
             if (!class_exists($className)) {
                 throw new Exception('class ' . $className . ' doesn\'t exist');
             }

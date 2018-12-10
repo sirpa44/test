@@ -17,7 +17,10 @@ class ConfigurationManager implements ConfigurationInterface
         if (!is_readable($configFilePath)) {
             throw new ConfigException('configuration file missing');
         }
-        $this->configData = parse_ini_file($configFilePath);
+        $this->configData = parse_ini_file($configFilePath, true);
+//        echo '<pre>';
+//        var_dump($this->configData);
+//        echo '</pre>';
     }
 
     /**
@@ -29,9 +32,13 @@ class ConfigurationManager implements ConfigurationInterface
     public function get($argument)
     {
         if (!isset($this->configData[$argument])) {
+//            echo '<pre>';
+//            var_dump($argument);
+//            var_dump(array_keys($this->configData));
+//            echo '</pre>';
             throw new ConfigException('wrong key or value missing');
         }
-        if (strpos($this->configData[$argument], ',')) {
+        if (is_string($this->configData[$argument]) && strpos($this->configData[$argument], ',')) {
             return preg_split("/,/", $this->configData[$argument]);
         }
         return $this->configData[$argument];

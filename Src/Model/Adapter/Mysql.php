@@ -13,7 +13,8 @@ class Mysql implements AdapterInterface
 
     public function __construct($dependencyContainer)
     {
-        $this->configPath = __DIR__ . $dependencyContainer->get(ConfigurationManager::class)->get('mysqlsourcepath');
+        $config = $dependencyContainer->get(ConfigurationManager::class)->get('mysql');
+        $this->configPath = $config['mysqlconfigpath'];
     }
 
 
@@ -35,7 +36,7 @@ class Mysql implements AdapterInterface
             $request->execute(array($userId));
             $result = $request->fetch(PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
-            throw new \Exception($e);
+            throw new \Exception('show one is not allowed');
         }
 
         return $result;
@@ -56,7 +57,7 @@ class Mysql implements AdapterInterface
             $request->execute();
             $result = $request->fetchAll(PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
-            throw new \Exception($e);
+            throw new \Exception('show all is not allowed');
         }
         return $result;
     }

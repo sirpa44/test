@@ -3,7 +3,7 @@ namespace Oat\App;
 
 use Exception;
 
-class DIC implements DICInterface
+class DependencyContainer implements DependencyContainerInterface
 {
     private $registry = [];
 
@@ -18,7 +18,7 @@ class DIC implements DICInterface
         if (!array_key_exists($shortClassName, $this->registry)) {
             throw new Exception('class ' . $shortClassName . '  isn\'t set');
         }
-        return $this->registry[$shortClassName]();
+        return $this->registry[$shortClassName]($this);
     }
 
     /**

@@ -22,12 +22,8 @@ class ApiModel
         if (!is_callable($method, $format)) {
             throw new Exception("method invalid");
         }
-        $configurationManager = $dic->get('ConfigurationManager');
-        $dic->set(FormatFactory::class, function () use($configurationManager) {
-            return new FormatFactory($configurationManager);
-        });
-        $adapterClassName = $dic->get('FormatFactory')->getFormatInstance($dic, $format);
-        return $dic->get($adapterClassName)->$method($userId);
+        $adapterInstance = $dic->get('FormatFactory')->getFormatInstance($dic, $format);
+        return $adapterInstance->$method($userId);
     }
 
 }

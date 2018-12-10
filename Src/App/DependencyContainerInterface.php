@@ -1,7 +1,7 @@
 <?php
 namespace Oat\App;
 
-interface DICInterface
+interface DependencyContainerInterface
 {
     /**
      * find an intance with it class name

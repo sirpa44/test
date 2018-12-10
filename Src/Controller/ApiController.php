@@ -24,7 +24,6 @@ class ApiController implements ControllerInterface
         if (isset($parameters['id'])) {
             $userId = $parameters['id'];
         }
-        $dic->set(ApiModel::class);
         return $dic->get('ApiModel')->apiService($dic, $format, $userId, $method);
     }
 }

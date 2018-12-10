@@ -22,7 +22,6 @@ class Router
         }
         $method = $parameters['method'];
         unset($parameters['method'], $parameters['controller']);
-        $dic->set($controllerName, new $controllerName());
         return $dic->get($controllerClassName)->action($dic, $parameters, $method);
     }
 }

@@ -33,10 +33,6 @@ class FormatFactory
         if (!is_a($classPath, $this->adapterInterfacePath, true)) {
             throw new \Exception("instance invalid");
         }
-        $configurationManager = $dic->get('ConfigurationManager');
-        $dic->set($className, function () use ($classPath, $configurationManager) {
-            return new $classPath($configurationManager);
-        });
-        return $className;
+        return $dic->get($className);
     }
 }

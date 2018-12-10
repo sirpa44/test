@@ -11,9 +11,9 @@ class Mysql implements AdapterInterface
     private $pdo;
     private $configPath;
 
-    public function __construct($independencyContainer)
+    public function __construct($dependencyContainer)
     {
-        $this->configPath = __DIR__ . $independencyContainer->get(ConfigurationManager::class)->get('mysqlsourcepath');
+        $this->configPath = __DIR__ . $dependencyContainer->get(ConfigurationManager::class)->get('mysqlsourcepath');
     }
 
 

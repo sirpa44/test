@@ -8,9 +8,9 @@ class Csv extends Adapter
 {
     protected $path;
 
-    public function __construct($independencyContainer)
+    public function __construct($dependencyContainer)
     {
-        $this->path = __DIR__ . $independencyContainer->get(ConfigurationManager::class)->get('csvsourcepath');
+        $this->path = __DIR__ . $dependencyContainer->get(ConfigurationManager::class)->get('csvsourcepath');
     }
 
     /**

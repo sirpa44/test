@@ -8,9 +8,9 @@ class Json extends Adapter
 {
     protected $path;
 
-    public function __construct($independencyContainer)
+    public function __construct($dependencyContainer)
     {
-        $this->path = __DIR__ . $independencyContainer->get(ConfigurationManager::class)->get('jsonsourcepath');
+        $this->path = __DIR__ . $dependencyContainer->get(ConfigurationManager::class)->get('jsonsourcepath');
     }
 
     /**

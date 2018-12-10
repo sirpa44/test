@@ -3,17 +3,20 @@ namespace Oat\Model\Factory;
 
 use Oat\App\ConfigurationManager;
 
+
 class FormatFactory
 {
     private $format;
     private $adapterPath;
     private $adapterInterfacePath;
+    private $dependencyContainer;
 
-    public function __construct($configurationManager)
+    public function __construct($dependencyContainer)
     {
-        $this->format = $configurationManager->get('available', true);
-        $this->adapterPath = $configurationManager->get('adapterpath');
-        $this->adapterInterfacePath = $configurationManager->get('adapterinterfacepath');
+        $this->format = $dependencyContainer->get(ConfigurationManager::class)->get('available', true);
+        $this->adapterPath = $dependencyContainer->get(ConfigurationManager::class)->get('adapterpath');
+        $this->adapterInterfacePath = $dependencyContainer->get(ConfigurationManager::class)->get('adapterinterfacepath');
+        $this->dependencyContainer = $dependencyContainer;
     }
 
     /**
@@ -22,7 +25,7 @@ class FormatFactory
      * @return instance
      * @throws \Exception
      */
-    public function getFormatInstance($dic, $format)
+    public function getFormatInstance($format)
     {
         $format = strtolower($format);
         if (!in_array($format, $this->format)) {
@@ -33,6 +36,6 @@ class FormatFactory
         if (!is_a($classPath, $this->adapterInterfacePath, true)) {
             throw new \Exception("instance invalid");
         }
-        return $dic->get($className);
+        return $this->dependencyContainer->get($classPath);
     }
 }

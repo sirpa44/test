@@ -13,12 +13,12 @@ class DependencyContainer implements DependencyContainerInterface
      * @return mixed
      * @throws Exception
      */
-    public function get($shortClassName)
+    public function get($className)
     {
-        if (!array_key_exists($shortClassName, $this->registry)) {
-            throw new Exception('class ' . $shortClassName . '  isn\'t set');
+        if (!array_key_exists($className, $this->registry)) {
+            throw new Exception('class ' . $className . '  isn\'t set');
         }
-        return $this->registry[$shortClassName]($this);
+        return $this->registry[$className]($this);
     }
 
     /**
@@ -34,12 +34,11 @@ class DependencyContainer implements DependencyContainerInterface
             if (!class_exists($className)) {
                 throw new Exception('class ' . $className . ' doesn\'t exist');
             }
-            $closure = function () use ($className) {
-                return new $className();
+            $closure = function ($container) use ($className) {
+                return new $className($container);
             };
         }
-        $modifiedClassName = array_reverse(explode('\\',$className));
-        $shortClassName = $modifiedClassName[0];
-        $this->registry[$shortClassName] = $closure;
+
+        $this->registry[$className] = $closure;
     }
 }

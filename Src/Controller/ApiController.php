@@ -5,6 +5,12 @@ use Oat\Model\ApiModel;
 
 class ApiController implements ControllerInterface
 {
+    private $dependencyContainer;
+
+    public function __construct($dependencyContainer)
+    {
+        $this->dependencyContainer = $dependencyContainer;
+    }
 
     /**
      * lead to service
@@ -14,7 +20,7 @@ class ApiController implements ControllerInterface
      * @return array
      * @throws \Exception
      */
-    public function action($dic, $parameters, $method)
+    public function action($parameters, $method)
     {
         if (!isset($parameters['format'])) {
             throw new \Exception("format invalid");
@@ -24,6 +30,6 @@ class ApiController implements ControllerInterface
         if (isset($parameters['id'])) {
             $userId = $parameters['id'];
         }
-        return $dic->get('ApiModel')->apiService($dic, $format, $userId, $method);
+        return $this->dependencyContainer->get(ApiModel::class)->apiService($format, $userId, $method);
     }
 }

@@ -1,15 +1,16 @@
 <?php
 namespace Oat\Model\Adapter;
 
+use Oat\App\ConfigurationManager;
 use Oat\App\Exception\AdapterException;
 
 class Json extends Adapter
 {
     protected $path;
 
-    public function __construct($configurationManager)
+    public function __construct($independencyContainer)
     {
-        $this->path = __DIR__ . $configurationManager->get('jsonsourcepath');
+        $this->path = __DIR__ . $independencyContainer->get(ConfigurationManager::class)->get('jsonsourcepath');
     }
 
     /**

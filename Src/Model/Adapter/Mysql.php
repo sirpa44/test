@@ -1,6 +1,7 @@
 <?php
 namespace Oat\Model\Adapter;
 
+use Oat\App\ConfigurationManager;
 use Oat\App\Exception\ConfigException;
 use PDO;
 
@@ -8,11 +9,11 @@ class Mysql implements AdapterInterface
 {
 
     private $pdo;
-    private $configPath = __DIR__ . '/../../../config/mysql.ini';
+    private $configPath;
 
-    public function __construct($configurationManager)
+    public function __construct($independencyContainer)
     {
-        $this->configPath = __DIR__ . $configurationManager->get('mysqlsourcepath');
+        $this->configPath = __DIR__ . $independencyContainer->get(ConfigurationManager::class)->get('mysqlsourcepath');
     }
 
 

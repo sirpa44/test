@@ -14,28 +14,19 @@ define('ROOT', __DIR__ . '/Src/');
 $configFilePath = __DIR__ . "/config/config.ini";
 require __DIR__ . "/vendor/autoload.php";
 $dic = new DependencyContainer();
-$dic->set('ConfigurationManager', function () use($configFilePath) {
-    return new ConfigurationManager($configFilePath);
+$dic->set(ConfigurationManager::class, function () use($configFilePath) {
+    return new \Oat\App\ConfigurationManager($configFilePath);
 });
-$configurationManager = $dic->get('ConfigurationManager');
 $dic->set(Router::class);
 $dic->set(ApiController::class);
 $dic->set(ApiModel::class);
-$dic->set(FormatFactory::class, function () use($configurationManager) {
-    return new FormatFactory($configurationManager);
-});
-$dic->set('Json', function () use ($configurationManager) {
-    return new Json($configurationManager);
-});
-$dic->set('Csv', function () use ($configurationManager) {
-    return new Csv($configurationManager);
-});
-$dic->set('Mysql', function () use ($configurationManager) {
-    return new Mysql($configurationManager);
-});
+$dic->set(FormatFactory::class);
+$dic->set(Json::class);
+$dic->set(Csv::class);
+$dic->set(Mysql::class);
 
 try {
-    $data = $dic->get('Router')->route($dic, $_GET);
+    $data = $dic->get(Router::class)->route($_GET);
     header('HTTP/1.1 200 OK');
     header('Content-Type: application/json');
     echo json_encode($data);

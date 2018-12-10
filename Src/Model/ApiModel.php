@@ -2,12 +2,16 @@
 namespace Oat\Model;
 
 use Exception;
-use Oat\App\ConfigurationManager;
 use Oat\Model\Factory\FormatFactory;
 
 class ApiModel
 {
+    private $dependencyContainer;
 
+    public function __construct($dependencyContainer)
+    {
+        $this->dependencyContainer = $dependencyContainer;
+    }
 
     /**
      * call the factory and call the adapter
@@ -17,12 +21,12 @@ class ApiModel
      * @return array
      * @throws \Exception
      */
-    public function apiService($dic, $format, $userId, $method)
+    public function apiService($format, $userId, $method)
     {
         if (!is_callable($method, $format)) {
             throw new Exception("method invalid");
         }
-        $adapterInstance = $dic->get('FormatFactory')->getFormatInstance($dic, $format);
+        $adapterInstance = $this->dependencyContainer->get(FormatFactory::class)->getFormatInstance($format);
         return $adapterInstance->$method($userId);
     }
 

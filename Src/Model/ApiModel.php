@@ -6,7 +6,12 @@ use Oat\Model\Factory\FormatFactory;
 
 class ApiModel
 {
+    private $dependencyContainer;
 
+    public function __construct($dependencyContainer)
+    {
+        $this->dependencyContainer = $dependencyContainer;
+    }
 
     /**
      * call the factory and call the adapter
@@ -21,8 +26,7 @@ class ApiModel
         if (!is_callable($method, $format)) {
             throw new Exception("method invalid");
         }
-        $factory = new FormatFactory();
-        $adapterInstance = $factory->getFormatInstance($format);
+        $adapterInstance = $this->dependencyContainer->get(FormatFactory::class)->getFormatInstance($format);
         return $adapterInstance->$method($userId);
     }
 

@@ -1,11 +1,18 @@
 <?php
 namespace Oat\Model\Adapter;
 
+use Oat\App\ConfigurationManager;
 use Oat\App\Exception\AdapterException;
 
 class Csv extends Adapter
 {
-    protected $path = ROOT . 'Source/testtakers.csv';
+    protected $path;
+
+    public function __construct($dependencyContainer)
+    {
+        $config = $dependencyContainer->get(ConfigurationManager::class)->get('csv');
+        $this->path = $config['csvsourcepath'];
+    }
 
     /**
      * read, extract and convert a csv file content

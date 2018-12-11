@@ -3,7 +3,12 @@ namespace Oat\App;
 
 class Router
 {
-    private $interfaceControllerPath = '\Oat\Controller\ControllerInterface';
+    private $dependencyContainer;
+
+    public function __construct($dependencyContainer)
+    {
+        $this->dependencyContainer = $dependencyContainer;
+    }
 
     /**
      * lead to the controller
@@ -17,13 +22,12 @@ class Router
             throw new \Exception("method or controller invalid");
         }
         $controllerClassName = ucfirst($parameters['controller']) . 'Controller';
-        $controllerName = '\Oat\Controller\\' . $controllerClassName;
-        if (!is_a($controllerName, $this->interfaceControllerPath, true)) {
+        $controllerName = 'Oat\Controller\\' . $controllerClassName;
+        if (!is_a($controllerName, $this->dependencyContainer->get(ConfigurationManager::class)->get('interfaceControllerPath'), true)) {
             throw new \Exception("controller invalid");
         }
         $method = $parameters['method'];
-        $controller = new $controllerName();
         unset($parameters['method'], $parameters['controller']);
-        return $controller->action($parameters, $method);
+        return $this->dependencyContainer->get($controllerName)->action($parameters, $method);
     }
 }

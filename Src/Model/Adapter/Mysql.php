@@ -1,6 +1,7 @@
 <?php
 namespace Oat\Model\Adapter;
 
+use Oat\App\ConfigurationManager;
 use Oat\App\Exception\ConfigException;
 use PDO;
 
@@ -8,7 +9,13 @@ class Mysql implements AdapterInterface
 {
 
     private $pdo;
-    private $configPath = __DIR__ . '/../../../config/mysql.ini';
+    private $configPath;
+
+    public function __construct($dependencyContainer)
+    {
+        $config = $dependencyContainer->get(ConfigurationManager::class)->get('mysql');
+        $this->configPath = $config['mysqlconfigpath'];
+    }
 
 
 
@@ -18,7 +25,7 @@ class Mysql implements AdapterInterface
      * @return array
      * @throws \Exception
      */
-    public function showOne($id)
+    public function showOne($userId)
     {
         try {
             $request = $this->getConnection()->prepare('
@@ -26,11 +33,12 @@ class Mysql implements AdapterInterface
                 FROM users
                 WHERE id = ?
             ');
-            $request->execute(array($id));
+            $request->execute(array($userId));
             $result = $request->fetch(PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
-            throw new \Exception($e);
+            throw new \Exception('show one is not allowed');
         }
+
         return $result;
     }
 
@@ -49,7 +57,7 @@ class Mysql implements AdapterInterface
             $request->execute();
             $result = $request->fetchAll(PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
-            throw new \Exception($e);
+            throw new \Exception('show all is not allowed');
         }
         return $result;
     }

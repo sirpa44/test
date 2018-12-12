@@ -10,7 +10,6 @@ use Oat\Model\Adapter\Mysql;
 use Oat\Model\ApiModel;
 use Oat\Model\Factory\FormatFactory;
 
-define('ROOT', __DIR__ . '/Src/');
 $configFilePath = __DIR__ . "/config/config.ini";
 require __DIR__ . "/vendor/autoload.php";
 $dic = new DependencyContainer();

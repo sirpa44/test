@@ -8,7 +8,7 @@ class JsonTest extends TestCase
     public function testShowOne()
     {
         define('ROOT', __DIR__ . '/../Src/');
-        $json = new Json;
+        $json = new Json();
         $user =  $json->showOne(10);
         $this->assertTrue(is_array($user));
     }

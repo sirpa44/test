@@ -37,7 +37,6 @@ class DependencyContainer implements DependencyContainerInterface
                 return new $className($container);
             };
         }
-
         $this->registry[$className] = $closure;
     }
 }

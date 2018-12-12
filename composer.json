@@ -20,6 +20,6 @@
   "require-dev": {
     "phpro/grumphp": "^0.14.2",
     "phpmd/phpmd": "^2.6",
-    "phpunit/phpunit": "^7.4"
+    "phpunit/phpunit": "^7.5"
   }
 }

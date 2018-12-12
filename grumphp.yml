@@ -7,3 +7,8 @@ parameters:
             exclude: []
             ruleset: ['cleancode', 'codesize', 'naming']
             triggered_by: ['php']
+        phpunit:
+            config_file: ~
+            testsuite: testsuite: test/Src/App
+            group: []
+            always_execute: false

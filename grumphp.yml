@@ -9,6 +9,6 @@ parameters:
             triggered_by: ['php']
         phpunit:
             config_file: ~
-            testsuite: testsuite: test/Src/App
+            testsuite: ~
             group: []
             always_execute: false

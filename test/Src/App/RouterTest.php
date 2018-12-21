@@ -12,20 +12,10 @@ class RouterTest extends TestCase
 
     protected function setUp()
     {
-
-//            ->willReturn($configurationManager);
-//
-//        $dependencyContainer
-//            ->method('get')
-//            ->with('Oat\Controller\ApiController')
-//            ->willReturn($apiController);
-
-
     }
 
     protected function tearDown()
     {
-        unset($this->service);
     }
 
     public function testRoute()
@@ -108,18 +98,4 @@ class RouterTest extends TestCase
 
         $this->service->route($parameters);
     }
-
-
-//    public function testOther()
-//    {
-//        $stub = $this->createMock(ConfigurationManager::class);
-//        $stub->method('get')
-//            ->willReturn('interface');
-//
-//        $dic = new DependencyContainer();
-//        $dic->set(ConfigurationManager::class, $stub);
-//
-//
-//        $this->service = new \Oat\App\Router($dic);
-//    }
 }

@@ -14,7 +14,6 @@ class ApiController implements ControllerInterface
 
     /**
      * lead to service
-     * @param $dic DependencyInjectionContainer
      * @param array $parameters
      * @param string $method
      * @return array

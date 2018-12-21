@@ -21,13 +21,15 @@ class Router
         if (!isset($parameters['controller']) || !isset($parameters['method'])) {
             throw new \Exception("method or controller invalid");
         }
-        $controllerClassName = ucfirst($parameters['controller']) . 'Controller';
-        $controllerName = 'Oat\Controller\\' . $controllerClassName;
-        if (!is_a($controllerName, $this->dependencyContainer->get(ConfigurationManager::class)->get('interfaceControllerPath'), true)) {
+        $controller = $this->dependencyContainer->get($parameters['controller']);
+        if (!is_a(
+            $controller,
+            $this->dependencyContainer->get(ConfigurationManager::class)->get('interfaceControllerPath'),
+            true)) {
             throw new \Exception("controller invalid");
         }
         $method = $parameters['method'];
         unset($parameters['method'], $parameters['controller']);
-        return $this->dependencyContainer->get($controllerName)->action($parameters, $method);
+        return $controller->action($parameters, $method);
     }
 }

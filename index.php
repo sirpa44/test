@@ -3,7 +3,6 @@
 use Oat\App\ConfigurationManager;
 use Oat\App\DependencyContainer;
 use Oat\App\Router;
-use Oat\Controller\ApiController;
 use Oat\Model\Adapter\Csv;
 use Oat\Model\Adapter\Json;
 use Oat\Model\Adapter\Mysql;
@@ -12,20 +11,22 @@ use Oat\Model\Factory\FormatFactory;
 
 $configFilePath = __DIR__ . "/config/config.ini";
 require __DIR__ . "/vendor/autoload.php";
-$dic = new DependencyContainer();
-$dic->set(ConfigurationManager::class, function () use($configFilePath) {
+$dependencyContainer = new DependencyContainer();
+$dependencyContainer->set(ConfigurationManager::class, function () use($configFilePath) {
     return new \Oat\App\ConfigurationManager($configFilePath);
 });
-$dic->set(Router::class);
-$dic->set(ApiController::class);
-$dic->set(ApiModel::class);
-$dic->set(FormatFactory::class);
-$dic->set(Json::class);
-$dic->set(Csv::class);
-$dic->set(Mysql::class);
+$dependencyContainer->set(Router::class);
+$dependencyContainer->set('api', function () use($dependencyContainer) {
+    return new Oat\Controller\ApiController($dependencyContainer);
+});
+$dependencyContainer->set(ApiModel::class);
+$dependencyContainer->set(FormatFactory::class);
+$dependencyContainer->set(Json::class);
+$dependencyContainer->set(Csv::class);
+$dependencyContainer->set(Mysql::class);
 
 try {
-    $data = $dic->get(Router::class)->route($_GET);
+    $data = $dependencyContainer->get(Router::class)->route($_GET);
     header('HTTP/1.1 200 OK');
     header('Content-Type: application/json');
     echo json_encode($data);

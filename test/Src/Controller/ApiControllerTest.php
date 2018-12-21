@@ -29,4 +29,27 @@ class ApiControllerTest extends TestCase
         $this->assertEquals('isGood', $service->action($parameters, $method));
 
     }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testWithoutFormat()
+    {
+       $parameters = ['format' => null];
+       $method = 'show';
+
+        $apiModel = $this->createMock(ApiModel::class);
+        $apiModel
+            ->method('apiService')
+            ->willReturn('isGood');
+
+        $dependencyContainer = $this->createMock(DependencyContainer::class);
+        $dependencyContainer
+            ->method('get')
+            ->willReturn($apiModel);
+
+       $service = new ApiController($dependencyContainer);
+
+       $service->action($parameters, $method);
+    }
 }
